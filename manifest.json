@@ -1,0 +1,23 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "name": "InvCounter",
+  "version": "1.2.0",
+  "manifest_version": 2,
+  "description": "Tells how many items are in stock at HotTopic.com, BoxLunch.com, and Target.com",
+  "homepage_url": "https://reddit.com/u/regexr",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "InvCounter"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs"
+  ]
+}

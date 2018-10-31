@@ -37,11 +37,34 @@
 		document.getElementsByClassName('product-variations')[0].style.fontSize = '18px';
 		document.getElementsByClassName('product-variations')[0].innerHTML = text;
 	} else if (document.location.href.indexOf('funko-shop') > -1) {
+		function sleep(ms) {
+		  return new Promise(resolve => setTimeout(resolve, ms));
+		}
+		async function demo() {
+			amount = 15000;
+		    while(true) {
+			console.log("checking " + amount);
+			document.getElementById('quantity').value = amount;
+			document.getElementsByClassName('input-row')[2].children[0].click();
+			    await sleep(500);
+			    text = document.getElementsByClassName("simple-popup")[0].innerHTML;
+			    console.log(text);
+			    if (document.getElementById("cart-summary-overlay")) {
+				break;
+			    }
+			amount = amount - 1000;
+		    }
+		    if (amount == 0) {
+			amount = 1;
+		    }
+		    justAbove = amount + 1000;
+		    wnd = window.open("/cart/change?line=1&quantity=0");
+		    wnd.close();
+		    await sleep(500);
+		    alert("There are between " + amount + " and " + justAbove + " available");
+		    location.reload();
+		}
 		document.getElementById('quantity').type = "visible";
-		document.getElementById('quantity').value = 999999999;
-		document.getElementsByClassName('input-row')[2].children[0].click();
-		// document.getElementsByClassName('simple-popup')[0].innerHTML.split(" ")[4];
-		document.getElementById('quantity').value = 1;
-
+		demo();
 	}
 })();

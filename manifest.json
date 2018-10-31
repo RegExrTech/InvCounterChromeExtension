@@ -3,7 +3,7 @@
 
   "name": "InvCounter",
   "version": "1.5.0",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "description": "Tells how many items are in stock at Funko-Shop.com, HotTopic.com, BoxLunch.com, Target.com, and Emp.co.uk",
   "homepage_url": "https://reddit.com/u/regexr",
   "background": {

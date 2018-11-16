@@ -19,7 +19,8 @@
 		        text = text + m[1] + " available online.</br>";
 		    }
 		} while (m);
-		document.getElementsByClassName('h-margin-b-tight styles__ShippingHeading-s1n8m629-1 pOnoh')[0].innerHTML = text + document.getElementsByClassName('h-margin-b-tight styles__ShippingHeading-s1n8m629-1 pOnoh')[0].innerHTML
+		alert(text);
+//		document.getElementsByClassName('h-margin-b-tight styles__ShippingHeading-s1n8m629-1 pOnoh')[0].innerHTML = text + document.getElementsByClassName('h-margin-b-tight styles__ShippingHeading-s1n8m629-1 pOnoh')[0].innerHTML
 	} else if (document.location.href.indexOf('emp.co.uk') > -1) {
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( "GET", document.location.href, false );

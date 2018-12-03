@@ -2,9 +2,7 @@
 
 (function() {
 	if (document.location.href.indexOf('hottopic.com') > -1 || document.location.href.indexOf('boxlunch.com') > -1) {
-		document.getElementById("Quantity").children[0].innerHTML = 999999999;
-		document.getElementById('add-to-cart').click();
-		console.log(document.getElementsByClassName('in-stock-msg')[0].innerHTML);
+		document.getElementsByClassName('low-inventory-message-pdp')[0].style.display = 'block';
 	} else if (document.location.href.indexOf('target.com') > -1) {
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( "GET", document.location.href, false );

@@ -37,35 +37,42 @@
 		document.getElementsByClassName('product-variations')[0].innerHTML = text;
 	} else if (document.location.href.indexOf('funko-shop') > -1) {
 		function sleep(ms) {
-		  return new Promise(resolve => setTimeout(resolve, ms));
+			return new Promise(resolve => setTimeout(resolve, ms));
 		}
-		async function demo() {
-		    document.getElementsByClassName('input-row')[0].children[1].type = "visible";
-		    document.getElementsByClassName('input-row')[2].children[0].dataset["limit"] = "false"
-		    amount = 15000;
-		    while(true) {
-			console.log("checking " + amount);
-			document.getElementById('quantity').value = amount;
-			document.getElementsByClassName('input-row')[2].children[0].click();
-			    await sleep(500);
-			    text = document.getElementsByClassName("simple-popup")[0].innerHTML;
-			    console.log(text);
-			    if (document.getElementById("cart-summary-overlay")) {
-				break;
-			    }
-			amount = amount - 1000;
-		    }
-		    if (amount == 0) {
-			amount = 1;
-		    }
-		    justAbove = amount + 1000;
-		    wnd = window.open("/cart/change?line=1&quantity=0");
-		    wnd.close();
-		    await sleep(500);
-		    alert("There are between " + amount + " and " + justAbove + " available");
-		    location.reload();
+		async function demo(amount, multiple) {
+			console.log("Checking starting with " + amount + " and decreasing by " + multiple);
+			while(true) {
+				console.log("checking " + amount);
+				document.getElementById('quantity').value = amount;
+				document.getElementsByClassName('input-row')[2].children[0].click();
+				await sleep(1000);
+				text = document.getElementsByClassName("simple-popup")[0].innerHTML;
+				console.log(text);
+				if (document.getElementById("cart-summary-overlay")) {
+					break;
+				}
+				amount = amount - multiple;
+			}
+			justAbove = amount + multiple;
+			if (amount == 0) {
+				amount = 1;
+			}
+			if (multiple > 1) {
+				if (multiple < 100) {
+					demo(justAbove, 1);
+				} else {
+					demo(justAbove, multiple/5);
+				}
+			}
+			wnd = window.open("/cart/change?line=1&quantity=0");
+			wnd.close();
+			await sleep(500);
+			//alert("There are between " + amount + " and " + justAbove + " available");
+			console.log("There are " + amount + " available.");
+			//location.reload();
 		}
-		document.getElementById('quantity').type = "visible";
-		demo();
+		document.getElementsByClassName('input-row')[0].children[1].type = "visible";
+		document.getElementsByClassName('input-row')[2].children[0].dataset["limit"] = "false";
+		demo(15000, 1000);
 	}
 })();

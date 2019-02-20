@@ -40,7 +40,9 @@
 		  return new Promise(resolve => setTimeout(resolve, ms));
 		}
 		async function demo() {
-			amount = 15000;
+		    document.getElementsByClassName('input-row')[0].children[1].type = "visible";
+		    document.getElementsByClassName('input-row')[2].children[0].dataset["limit"] = "false"
+		    amount = 15000;
 		    while(true) {
 			console.log("checking " + amount);
 			document.getElementById('quantity').value = amount;

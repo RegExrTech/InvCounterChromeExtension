@@ -39,40 +39,35 @@
 		function sleep(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
-		async function demo(amount, multiple) {
-			console.log("Checking starting with " + amount + " and decreasing by " + multiple);
-			while(true) {
-				console.log("checking " + amount);
-				document.getElementById('quantity').value = amount;
-				document.getElementsByClassName('input-row')[2].children[0].click();
-				await sleep(1000);
-				text = document.getElementsByClassName("simple-popup")[0].innerHTML;
-				console.log(text);
-				if (document.getElementById("cart-summary-overlay")) {
-					break;
-				}
-				amount = amount - multiple;
+		async function test(high, low) {
+			guess = Math.floor((high - low) / 2) + low;
+			console.log("High: " + high + " - Low: " + low);
+			console.log("checking " + guess);
+			if (guess == low) {
+				final = guess+1;
+				console.log("Final answer: " + final);
+				wnd = window.open("/cart/change?line=1&quantity=0");
+				wnd.close();
+				await sleep(500);
+				alert("There are " + final + " available");
+				location.reload();
+				// document.getElementsByClassName("title")[0].innerText = "THERE ARE " + final + " AVAILABLE.\n\n" + document.getElementsByClassName("title")[0].innerText;
+				return;
 			}
-			justAbove = amount + multiple;
-			if (amount == 0) {
-				amount = 1;
+			document.getElementById('quantity').value = guess;
+			document.getElementsByClassName('input-row')[2].children[0].click();
+			await sleep(1000);
+			if (document.getElementById("cart-summary-overlay")) {  // Guess was too low
+				test(high, guess);
+			} else {  // Guess was too high
+				test(guess, low);
 			}
-			if (multiple > 1) {
-				if (multiple < 100) {
-					demo(justAbove, 1);
-				} else {
-					demo(justAbove, multiple/5);
-				}
-			}
-			wnd = window.open("/cart/change?line=1&quantity=0");
-			wnd.close();
-			await sleep(500);
-			//alert("There are between " + amount + " and " + justAbove + " available");
-			console.log("There are " + amount + " available.");
-			//location.reload();
 		}
+		wnd = window.open("/cart/change?line=1&quantity=0");
+		wnd.close();
 		document.getElementsByClassName('input-row')[0].children[1].type = "visible";
 		document.getElementsByClassName('input-row')[2].children[0].dataset["limit"] = "false";
-		demo(15000, 1000);
+		document.getElementsByClassName("title")[0].innerHTML = "<div style='color:red'>PLEASE WAIT, CHECKING STOCK...\n\n</div>" + document.getElementsByClassName("title")[0].innerHTML
+		test(30000, 0);
 	}
 })();

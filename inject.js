@@ -69,5 +69,7 @@
 		document.getElementsByClassName('input-row')[2].children[0].dataset["limit"] = "false";
 		document.getElementsByClassName("title")[0].innerHTML = "<div style='color:red'>PLEASE WAIT, CHECKING STOCK...\n\n</div>" + document.getElementsByClassName("title")[0].innerHTML
 		test(30000, 0);
+	} else if (document.location.href.indexOf('galactictoys') > -1) {
+		document.getElementsByClassName('prd_in_stock')[0].innerHTML = /"inventory_quantity":(.*?),/g.exec(document.getElementsByClassName('wrapper main-content')[0].children[0].innerHTML)[1] + document.getElementsByClassName('prd_in_stock')[0].innerHTML;
 	}
 })();

@@ -2,7 +2,19 @@
 
 (function() {
 	if (document.location.href.indexOf('hottopic.com') > -1 || document.location.href.indexOf('boxlunch.com') > -1) {
-		document.getElementsByClassName('low-inventory-message-pdp')[0].style.display = 'block';
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( "GET", document.location.href, false );
+		xmlHttp.send( null );
+		var text = ""
+		var html = xmlHttp.responseText;
+		var re = /stock&quot;:([0-9]+),/g;
+		do {
+		    m = re.exec(html);
+		    if (m) {
+		        text = text + m[1] + " available online.</br>";
+		    }
+		} while (m);
+		alert(text);
 	} else if (document.location.href.indexOf('target.com') > -1) {
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( "GET", document.location.href, false );

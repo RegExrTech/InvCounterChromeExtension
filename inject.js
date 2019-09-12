@@ -47,40 +47,22 @@
 		} while (m);
 		document.getElementsByClassName('product-variations')[0].style.fontSize = '18px';
 		document.getElementsByClassName('product-variations')[0].innerHTML = text;
-	} else if (document.location.href.indexOf('funko-shop') > -1) {
+	} else if (document.location.href.indexOf('funko') > -1) {
 		function sleep(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
-		async function test(high, low) {
-			guess = Math.floor((high - low) / 2) + low;
-			console.log("High: " + high + " - Low: " + low);
-			console.log("checking " + guess);
-			if (guess == low) {
-				final = guess+1;
-				console.log("Final answer: " + final);
-				wnd = window.open("/cart/change?line=1&quantity=0");
-				wnd.close();
-				await sleep(500);
-				alert("There are " + final + " available");
-				location.reload();
-				// document.getElementsByClassName("title")[0].innerText = "THERE ARE " + final + " AVAILABLE.\n\n" + document.getElementsByClassName("title")[0].innerText;
-				return;
-			}
-			document.getElementById('quantity').value = guess;
-			document.getElementsByClassName('input-row')[2].children[0].click();
+		async function test() {
+			window.open('https://shop.funko.com/cart/add?id=' + document.getElementsByClassName('product-form__variants no-js')[0].children[0].value + '&quantity=1').close()
+			await sleep(500);
+			wind = window.open('https://shop.funko.com/cart/change?id=' + document.getElementsByClassName('product-form__variants no-js')[0].children[0].value + '&quantity=99999999999');
 			await sleep(1000);
-			if (document.getElementById("cart-summary-overlay")) {  // Guess was too low
-				test(high, guess);
-			} else {  // Guess was too high
-				test(guess, low);
-			}
+			count = wind.document.getElementsByClassName('js-qty')[0].children[0].value;
+			wind.close();
+			await sleep(500);
+			alert(count + " available.");
+			window.open('https://shop.funko.com/cart/change?id=' + document.getElementsByClassName('product-form__variants no-js')[0].children[0].value + '&quantity=0').close();
 		}
-		wnd = window.open("/cart/change?line=1&quantity=0");
-		wnd.close();
-		document.getElementsByClassName('input-row')[0].children[1].type = "visible";
-		document.getElementsByClassName('input-row')[2].children[0].dataset["limit"] = "false";
-		document.getElementsByClassName("title")[0].innerHTML = "<div style='color:red'>PLEASE WAIT, CHECKING STOCK...\n\n</div>" + document.getElementsByClassName("title")[0].innerHTML
-		test(30000, 0);
+		test();
 	} else if (document.location.href.indexOf('galactictoys') > -1) {
 		document.getElementsByClassName('prd_in_stock')[0].innerHTML = /"inventory_quantity":(.*?),/g.exec(document.getElementsByClassName('wrapper main-content')[0].children[0].innerHTML)[1] + document.getElementsByClassName('prd_in_stock')[0].innerHTML;
 	}

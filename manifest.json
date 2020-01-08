@@ -2,7 +2,7 @@
 "update_url": "https://clients2.google.com/service/update2/crx",
 
   "name": "InvCounter",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "manifest_version": 2,
   "description": "Tells how many items are in stock at Funko-Shop.com, HotTopic.com, GalacticToys.com, Target.com, and Emp.co.uk",
   "homepage_url": "https://reddit.com/u/regexr",
@@ -18,7 +18,6 @@
   },
   "permissions": [
     "https://shop.funko.com/*",
-    "http://shop.funko.com/*",
-    "tabs"
+    "http://shop.funko.com/*"
   ]
 }

@@ -51,12 +51,6 @@
 		function sleep(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
-		async function get_status(count, id) {
-			status = 0;
-			p = jQuery.post('/cart/add.js', {quantity: count, id: id}, function f() {status=1;});
-			await sleep(1000);
-			return status;
-		}
 		async function test(high, low, id, title) {
 			guess = Math.floor((high - low) / 2) + low;
 			console.log("High: " + high + " - Low: " + low);
@@ -67,16 +61,16 @@
 			if (guess == low) {
 				final = guess+1;
 				console.log("Final answer: " + final);
+				alert("There are " + final + " available");
 				wnd = window.open("/cart/change?line=1&quantity=0");
 				setTimeout(function(){
 				   wnd.close(); 
 				}, 100);
 				await sleep(500);
-				alert("There are " + final + " available");
 				location.reload();
 				return;
 			}
-			p = jQuery.post('/cart/add.js', {quantity: guess, id: id});
+			p = $.post('/cart/add.js', {quantity: guess, id: id});
 			await sleep(1000);
 			if (p.status == 200) {  // Guess was too low
 				test(high, guess, id, title);

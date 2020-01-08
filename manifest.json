@@ -8,6 +8,7 @@
   "homepage_url": "https://reddit.com/u/regexr",
   "background": {
     "scripts": [
+      "jquery.js",
       "background.js"
     ],
     "persistent": true
@@ -16,8 +17,8 @@
     "default_title": "InvCounter"
   },
   "permissions": [
-    "https://*.funko.com/*",
-    "http://*.funko.com/*",
+    "https://shop.funko.com/*",
+    "http://shop.funko.com/*",
     "tabs"
   ]
 }

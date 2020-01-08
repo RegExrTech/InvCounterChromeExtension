@@ -51,18 +51,45 @@
 		function sleep(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
-		async function test() {
-			window.open('https://shop.funko.com/cart/add?id=' + document.getElementsByClassName('product-form__variants no-js')[0].children[0].value + '&quantity=1').close()
-			await sleep(500);
-			wind = window.open('https://shop.funko.com/cart/change?id=' + document.getElementsByClassName('product-form__variants no-js')[0].children[0].value + '&quantity=99999999999');
+		async function get_status(count, id) {
+			status = 0;
+			p = jQuery.post('/cart/add.js', {quantity: count, id: id}, function f() {status=1;});
 			await sleep(1000);
-			count = wind.document.getElementsByClassName('js-qty')[0].children[0].value;
-			wind.close();
-			await sleep(500);
-			alert(count + " available.");
-			window.open('https://shop.funko.com/cart/change?id=' + document.getElementsByClassName('product-form__variants no-js')[0].children[0].value + '&quantity=0').close();
+			return status;
 		}
-		test();
+		async function test(high, low, id, title) {
+			guess = Math.floor((high - low) / 2) + low;
+			console.log("High: " + high + " - Low: " + low);
+			console.log("checking " + guess);
+			document.getElementsByClassName("product-single__title")[0].innerHTML = "<div style='color:red'>PLEASE WAIT, CHECKING STOCK...\n\n</div>" 
+			+ "<div>Checking " + guess + "\n\n</div>" 
+			+ title;
+			if (guess == low) {
+				final = guess+1;
+				console.log("Final answer: " + final);
+				wnd = window.open("/cart/change?line=1&quantity=0");
+				setTimeout(function(){
+				   wnd.close(); 
+				}, 100);
+				await sleep(500);
+				alert("There are " + final + " available");
+				location.reload();
+				return;
+			}
+			p = jQuery.post('/cart/add.js', {quantity: guess, id: id});
+			await sleep(1000);
+			if (p.status == 200) {  // Guess was too low
+				test(high, guess, id, title);
+			} else {  // Guess was too high
+				test(guess, low, id, title);
+			}
+		}
+		wnd = window.open("/cart/change?line=1&quantity=0");
+		wnd.close();
+		title = document.getElementsByClassName("product-single__title")[0].innerHTML;
+		document.getElementsByClassName("product-single__title")[0].innerHTML = "<div style='color:red'>PLEASE WAIT, CHECKING STOCK...\n\n</div>" + title;
+		id = document.getElementsByClassName('product-form__variants no-js')[0].children[0].value
+		test(30000, 0, id, title);
 	} else if (document.location.href.indexOf('galactictoys') > -1) {
 		document.getElementsByClassName('prd_in_stock')[0].innerHTML = /"inventory_quantity":(.*?),/g.exec(document.getElementsByClassName('wrapper main-content')[0].children[0].innerHTML)[1] + document.getElementsByClassName('prd_in_stock')[0].innerHTML;
 	}

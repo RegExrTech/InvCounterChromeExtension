@@ -16,8 +16,8 @@
     "default_title": "InvCounter"
   },
   "permissions": [
-    "https://*/*",
-    "http://*/*",
+    "https://*.funko.com/*",
+    "http://*.funko.com/*",
     "tabs"
   ]
 }

@@ -2,7 +2,7 @@
 "update_url": "https://clients2.google.com/service/update2/crx",
 
   "name": "InvCounter",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "manifest_version": 2,
   "description": "Tells how many items are in stock at Funko-Shop.com, HotTopic.com, GalacticToys.com, Target.com, and Emp.co.uk",
   "homepage_url": "https://reddit.com/u/regexr",
@@ -22,6 +22,10 @@
     "https://www.hottopic.com/*",
     "http://www.hottopic.com/*",
     "https://www.boxlunch.com/*",
-    "http://www.boxlunch.com/*"
+    "http://www.boxlunch.com/*",
+    "https://www.emp.co.uk/*",
+    "http://www.emp.co.uk/*",
+    "https://www.target.com/*",
+    "http://www.target.com/*"
   ]
 }

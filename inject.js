@@ -78,12 +78,13 @@
 				test(guess, low, id, title);
 			}
 		}
-		wnd = window.open("/cart/change?line=1&quantity=0");
-		wnd.close();
-		title = document.getElementsByClassName("product-single__title")[0].innerHTML;
-		document.getElementsByClassName("product-single__title")[0].innerHTML = "<div style='color:red'>PLEASE WAIT, CHECKING STOCK...\n\n</div>" + title;
-		id = document.getElementsByClassName('product-form__variants no-js')[0].children[0].value
-		test(30000, 0, id, title);
+		//wnd = window.open("/cart/change?line=1&quantity=0");
+		//wnd.close();
+		//title = document.getElementsByClassName("product-single__title")[0].innerHTML;
+		//document.getElementsByClassName("product-single__title")[0].innerHTML = "<div style='color:red'>PLEASE WAIT, CHECKING STOCK...\n\n</div>" + title;
+		//id = document.getElementsByClassName('product-form__variants no-js')[0].children[0].value
+		//test(30000, 0, id, title);
+		alert("Funko has changed their backend API and this extension no longer works.\nThis extension will automatically update when it is working again.");
 	} else if (document.location.href.indexOf('galactictoys') > -1) {
 		document.getElementsByClassName('prd_in_stock')[0].innerHTML = /"inventory_quantity":(.*?),/g.exec(document.getElementsByClassName('wrapper main-content')[0].children[0].innerHTML)[1] + document.getElementsByClassName('prd_in_stock')[0].innerHTML;
 	}

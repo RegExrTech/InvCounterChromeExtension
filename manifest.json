@@ -22,16 +22,5 @@
     "48": "logo48.png",
     "128": "logo128.png"
   },
-  "permissions": [
-    "https://shop.funko.com/*",
-    "http://shop.funko.com/*",
-    "https://www.hottopic.com/*",
-    "http://www.hottopic.com/*",
-    "https://www.boxlunch.com/*",
-    "http://www.boxlunch.com/*",
-    "https://www.emp.co.uk/*",
-    "http://www.emp.co.uk/*",
-    "https://www.target.com/*",
-    "http://www.target.com/*"
-  ]
+  "permissions": ["activeTab"]
 }

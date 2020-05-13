@@ -9,7 +9,8 @@
   "background": {
     "scripts": [
       "jquery.js",
-      "background.js"
+      "background.js",
+      "extensionmetric.js"
     ],
     "persistent": true
   },

@@ -2,15 +2,14 @@
 "update_url": "https://clients2.google.com/service/update2/crx",
 
   "name": "InvCounter",
-  "version": "1.20.0",
+  "version": "1.21.0",
   "manifest_version": 2,
   "description": "Tells how many items are in stock at various online stores that sell Funko Pop items.",
   "homepage_url": "https://reddit.com/u/regexr",
   "background": {
     "scripts": [
       "jquery.js",
-      "background.js",
-      "extensionmetric.js"
+      "background.js"
     ],
     "persistent": true
   },
